@@ -1,11 +1,11 @@
 import discord
 import logging
 from dumpbot import Dumpbot
-from util import config, create_logger, get_root_dir
+from util import config, create_logger, get_logger
 
 
 def main():
-    logger = create_logger()
+    logger = get_logger()
     dc_logger = create_logger("discord", level=logging.WARNING)
     intents = discord.Intents.default()
     intents.message_content = True

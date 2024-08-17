@@ -15,6 +15,7 @@ def create_logger(name: str = "dumpbot", level=logging.INFO):
     file_handler = RotatingFileHandler(
         filename=f"{get_root_dir()}/logs/{name}.log",
     )
+    file_handler.setFormatter(formatter)
     logger.addHandler(print_handler)
     logger.addHandler(file_handler)
     return logger
