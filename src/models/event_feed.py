@@ -32,9 +32,12 @@ class Event:
         self.description = description
         self.price = price
         self.start_date = datetime.fromisoformat(start_date)
-        self.ticket_sale_start_date = datetime.fromisoformat(
-            ticket_sale_start_date
-        )
+        if ticket_sale_start_date == "":
+            self.ticket_sale_start_date = None
+        else:
+            self.ticket_sale_start_date = datetime.fromisoformat(
+                ticket_sale_start_date
+            )
         self.ticket_link = ticket_link
         self.footer = footer
         self.image_url = image_url
