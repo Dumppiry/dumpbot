@@ -45,7 +45,13 @@ class Dumpbot(discord.Client):
     async def on_message(self, message: discord.Message):
         if message.author == self.user:
             return
-        if message.channel.name == "bot-feed":
+
+        # Read bot feed only if message has no reference and message is from bot.
+        if (
+            message.channel.name == "bot-feed"
+            and message.reference is None
+            and message.author.bot
+        ):
             try:
                 content_dict: dict = json.loads(message.content)
                 self.logger.info(f"Received bot-feed: {content_dict}")
