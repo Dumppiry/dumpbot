@@ -1,6 +1,7 @@
 import discord
 import json
 import logging
+import random
 from discord import app_commands
 from util import config, get_logger
 from .commands import dev_commands, commands
@@ -64,6 +65,15 @@ class Dumpbot(discord.Client):
                 await message.reply(f"Invalid json: {e}")
 
     async def handle_event_feed(self, message: discord.Message):
+        hype_endings = {
+            "tulee räjäyttämään tajunnan!",
+            "on tulossa, älä missaa tätä!",
+            "lyö sinut ällikällä!",
+            "on tulossa, ole valmiina!",
+            "laittaa jyväskylän sekaisin!",
+            "saa sinut vapisemaan!",
+            "on skibidi bop sigma event!",
+        }
         self.logger.info("Handling event_feed message.")
         content_dict: dict = json.loads(message.content)
         if not content_dict.get("event"):
@@ -91,7 +101,10 @@ class Dumpbot(discord.Client):
                     return
             match feed_data.modified:
                 case "":
-                    catch_line = f"Uusi tapahtuma julkaistiin! {event.title} tulee räjäyttämään tajunnan!"
+                    hype = random.choice(hype_endings)
+                    catch_line = (
+                        f"Uusi tapahtuma julkaistiin! {event.title} {hype}"
+                    )
                 case "price":
                     catch_line = f"Tapahtuman {event.title} hinta muuttui!"
                 case "date":
