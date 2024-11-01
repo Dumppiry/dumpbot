@@ -81,6 +81,5 @@ class Event:
 @dataclass
 class EventFeed:
     event: Event
-    type: str
     post_to: int
     modified: str | None = None

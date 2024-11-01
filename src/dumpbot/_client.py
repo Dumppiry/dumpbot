@@ -76,12 +76,9 @@ class Dumpbot(discord.Client):
         }
         self.logger.info("Handling event_feed message.")
         content_dict: dict = json.loads(message.content)
-        if not content_dict.get("event"):
-            self.logger.error("bot-feed of type event_feed is missing 'event'")
-            return
         try:
-            feed_data = EventFeed(**content_dict)
-            event: Event = Event(**content_dict["event"])
+            feed_data = EventFeed(**content_dict["data"])
+            event = Event(**feed_data.event)
             if (
                 self.event_post_channel is None
                 or self.event_post_channel.name != feed_data.post_to
