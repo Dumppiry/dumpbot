@@ -65,7 +65,7 @@ class Dumpbot(discord.Client):
                 await message.reply(f"Invalid json: {e}")
 
     async def handle_event_feed(self, message: discord.Message):
-        hype_endings = {
+        hype_endings = [
             "tulee räjäyttämään tajunnan!",
             "on tulossa, älä missaa tätä!",
             "lyö sinut ällikällä!",
@@ -73,7 +73,7 @@ class Dumpbot(discord.Client):
             "laittaa jyväskylän sekaisin!",
             "saa sinut vapisemaan!",
             "on skibidi bop sigma event!",
-        }
+        ]
         self.logger.info("Handling event_feed message.")
         content_dict: dict = json.loads(message.content)
         try:
